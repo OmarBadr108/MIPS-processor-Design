@@ -84,7 +84,7 @@ ram_memory #(.WIDTH(8) , .DEPTH(4096)) instruction_mem ( // 4 KB
 	.wr_data (wr_data), // 32
 	.ByteControl(2'b00), // 2
 
-	.rd_data (INSTRUCTION)  // 32
+	.rd_data (INSTRUCTION_F)  // 32
 	);
 
 
@@ -92,12 +92,13 @@ ram_memory #(.WIDTH(8) , .DEPTH(4096)) instruction_mem ( // 4 KB
 //--------------------------------------------------
 // Program Counter   		-- DONE --
 //--------------------------------------------------
+wire EN ;
 pc_reg pc_reg_D (
 	.clk	 (clk),
 	.rst_n	 (rst_n),
 	.pc_next (pc_next), // 32
-
-	.pc      (pc)  // 32
+	.EN 	 (EN) ,     // 1
+	.pc      (pc)       // 32
 	);
 
 
@@ -271,6 +272,24 @@ Byte_Control Byte_Control_D (
 	.out(Byte_Control_out)
 	);
 
+
+
+//--------------------------------------------------
+// Ftech_Decode_Register     		
+//--------------------------------------------------
+wire [31:0] INSTRUCTION_F , INSTRUCTION_D ;
+wire [31:0] PC_plus_4_f   , PC_plus_4_D ;
+Ftech_Decode_Register Ftech_Decode_Register_D (
+	.clk  (clk),
+	.rst_n (rst_n) ,
+	.EN   (),
+	.CLR  (),
+	.in_1 (),
+	.in_2  (),
+
+	.out_1(),
+	.out_2()
+	);
 
 //--------------------------------------------------
 // PC Control Mux    		-- DONE --
