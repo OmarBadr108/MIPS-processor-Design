@@ -30,7 +30,6 @@ add wave -noupdate -height 40 -expand -group {Program Counter} /mips_testbench/m
 add wave -noupdate -height 40 -expand -group {Program Counter} /mips_testbench/mips_top_inst/PC_plus_4
 add wave -noupdate -height 40 -expand -group {Program Counter} /mips_testbench/mips_top_inst/pc_next
 add wave -noupdate -height 40 -expand -group {Program Counter} /mips_testbench/mips_top_inst/pc
-add wave -noupdate /mips_testbench/mips_top_inst/pc_control_mux/data_out
 add wave -noupdate /mips_testbench/mips_top_inst/clk
 add wave -noupdate -height 40 -expand -group RegFile -color Khaki -radix unsigned /mips_testbench/mips_top_inst/wr_addr3
 add wave -noupdate -height 40 -expand -group RegFile -color Khaki /mips_testbench/mips_top_inst/rd_data2
@@ -42,9 +41,8 @@ add wave -noupdate /mips_testbench/mips_top_inst/rd_data_data_mem
 add wave -noupdate /mips_testbench/mips_top_inst/jump_shifted
 add wave -noupdate /mips_testbench/Imm_26
 add wave -noupdate /mips_testbench/mips_top_inst/zero_extend_imm
-add wave -noupdate /mips_testbench/op_code_tb
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {30000 ps} 0}
+WaveRestoreCursors {{Cursor 1} {126807 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100

@@ -5,4 +5,4 @@ vsim -voptargs=+accs work.mips_testbench -sv_seed 2360443213 -cover
 do ./wave.do \
 #Save coverage data and run the simulation
 #coverage save mips_testbench.ucdb -onexit
-run 0
+run -all

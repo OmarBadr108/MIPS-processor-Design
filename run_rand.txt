@@ -1,0 +1,8 @@
+vlib work
+vlog -f source_rand.txt +cover -covercells
+vsim -voptargs=+accs work.mips_testbench_randomized -cover
+
+do ./wave_rand.do \
+#Save coverage data and run the simulation
+coverage save mips_testbench.ucdb -onexit
+run -all

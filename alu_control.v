@@ -39,10 +39,6 @@ module alu_control (
 								AluControl   = 6'd17 ; // mthi
 							end 
 
-
-
-
-
 			{5'b00010,6'd18} : begin 
 								AluControl   = 6'd18 ; // mflo
 							end 

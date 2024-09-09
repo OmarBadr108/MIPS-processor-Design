@@ -4,9 +4,7 @@ module mips_top(
 	input wire  	   clk , rst_n,
 	input wire         wr_en_ins ,
 	input wire  [31:0] wr_data ,
-	input wire  [31:0] INSTRUCTION ,
 
-	output wire [31:0] pc , pc_next ,
 	output wire [31:0] wr_data3  // to prevent optimization 
 );
 
@@ -15,8 +13,8 @@ module mips_top(
 //--------------------------------------------------
 // Connections
 //--------------------------------------------------
-//wire [31:0] INSTRUCTION ;
-//wire [31:0] pc ,pc_next ;
+wire [31:0] INSTRUCTION ;
+wire [31:0] pc ,pc_next ;
 
 wire [31:0] rd_data_data_mem ;
 
@@ -74,7 +72,7 @@ assign shamt  = INSTRUCTION[10:6] ;
 assign funct  = INSTRUCTION[5:0] ;
 
 
-/*
+
 //--------------------------------------------------
 // Instruction Memory   		-- DONE --
 //--------------------------------------------------
@@ -88,7 +86,7 @@ ram_memory #(.WIDTH(8) , .DEPTH(4096)) instruction_mem ( // 4 KB
 
 	.rd_data (INSTRUCTION)  // 32
 	);
-*/
+
 
 
 //--------------------------------------------------
