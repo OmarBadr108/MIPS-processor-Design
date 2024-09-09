@@ -1,0 +1,156 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /mips_testbench
+=== Design Unit: work.mips_testbench
+=================================================================================
+
+Covergroup Coverage:
+    Covergroups                      1        na        na    70.74%
+        Coverpoints/Crosses          3        na        na        na
+            Covergroup Bins         50        29        21    58.00%
+----------------------------------------------------------------------------------------------------------
+Covergroup                                             Metric       Goal       Bins    Status               
+                                                                                                         
+----------------------------------------------------------------------------------------------------------
+ TYPE /mips_testbench/Instructions                     70.74%        100          -    Uncovered            
+    covered/total bins:                                    29         50          -                      
+    missing/total bins:                                    21         50          -                      
+    % Hit:                                             58.00%        100          -                      
+    type_option.weight=1
+    type_option.goal=100
+    type_option.comment=
+    type_option.strobe=0
+    type_option.merge_instances=auto(0)
+ Covergroup instance \/mips_testbench/Instructions_instance  
+                                                       70.74%        100          -    Uncovered            
+    covered/total bins:                                    29         50          -                      
+    missing/total bins:                                    21         50          -                      
+    % Hit:                                             58.00%        100          -                      
+    option.name=\/mips_testbench/Instructions_instance 
+    option.weight=1
+    option.goal=100
+    option.comment=
+    option.at_least=1
+    option.auto_bin_max=64
+    option.cross_num_print_missing=0
+    option.detect_overlap=0
+    option.per_instance=0
+    option.get_inst_coverage=0
+    Coverpoint R_TYPE                                  54.54%        100          -    Uncovered            
+        covered/total bins:                                12         22          -                      
+        missing/total bins:                                10         22          -                      
+        % Hit:                                         54.54%        100          -                      
+        option.weight=1
+        option.goal=100
+        option.comment=
+        option.at_least=1
+        option.auto_bin_max=64
+        option.detect_overlap=0
+        bin bltz_bgez                                       0          1          -    ZERO                 
+        bin slti                                            0          1          -    ZERO                 
+        bin sltiu                                           0          1          -    ZERO                 
+        bin andi                                            0          1          -    ZERO                 
+        bin ori                                             0          1          -    ZERO                 
+        bin xori                                            0          1          -    ZERO                 
+        bin lui                                             0          1          -    ZERO                 
+        bin mul                                             0          1          -    ZERO                 
+        bin sb                                              0          1          -    ZERO                 
+        bin sh                                              0          1          -    ZERO                 
+    Coverpoint I_TYPE                                  57.69%        100          -    Uncovered            
+        covered/total bins:                                15         26          -                      
+        missing/total bins:                                11         26          -                      
+        % Hit:                                         57.69%        100          -                      
+        option.weight=1
+        option.goal=100
+        option.comment=
+        option.at_least=1
+        option.auto_bin_max=64
+        option.detect_overlap=0
+        bin mfhi                                            0          1          -    ZERO                 
+        bin mthi                                            0          1          -    ZERO                 
+        bin mflo                                            0          1          -    ZERO                 
+        bin mtlo                                            0          1          -    ZERO                 
+        bin mult                                            0          1          -    ZERO                 
+        bin multu                                           0          1          -    ZERO                 
+        bin div                                             0          1          -    ZERO                 
+        bin divu                                            0          1          -    ZERO                 
+        bin sub                                             0          1          -    ZERO                 
+        bin xor_                                            0          1          -    ZERO                 
+        bin nor_                                            0          1          -    ZERO                 
+
+COVERGROUP COVERAGE:
+----------------------------------------------------------------------------------------------------------
+Covergroup                                             Metric       Goal       Bins    Status               
+                                                                                                         
+----------------------------------------------------------------------------------------------------------
+ TYPE /mips_testbench/Instructions                     70.74%        100          -    Uncovered            
+    covered/total bins:                                    29         50          -                      
+    missing/total bins:                                    21         50          -                      
+    % Hit:                                             58.00%        100          -                      
+    type_option.weight=1
+    type_option.goal=100
+    type_option.comment=
+    type_option.strobe=0
+    type_option.merge_instances=auto(0)
+ Covergroup instance \/mips_testbench/Instructions_instance  
+                                                       70.74%        100          -    Uncovered            
+    covered/total bins:                                    29         50          -                      
+    missing/total bins:                                    21         50          -                      
+    % Hit:                                             58.00%        100          -                      
+    option.name=\/mips_testbench/Instructions_instance 
+    option.weight=1
+    option.goal=100
+    option.comment=
+    option.at_least=1
+    option.auto_bin_max=64
+    option.cross_num_print_missing=0
+    option.detect_overlap=0
+    option.per_instance=0
+    option.get_inst_coverage=0
+    Coverpoint R_TYPE                                  54.54%        100          -    Uncovered            
+        covered/total bins:                                12         22          -                      
+        missing/total bins:                                10         22          -                      
+        % Hit:                                         54.54%        100          -                      
+        option.weight=1
+        option.goal=100
+        option.comment=
+        option.at_least=1
+        option.auto_bin_max=64
+        option.detect_overlap=0
+        bin bltz_bgez                                       0          1          -    ZERO                 
+        bin slti                                            0          1          -    ZERO                 
+        bin sltiu                                           0          1          -    ZERO                 
+        bin andi                                            0          1          -    ZERO                 
+        bin ori                                             0          1          -    ZERO                 
+        bin xori                                            0          1          -    ZERO                 
+        bin lui                                             0          1          -    ZERO                 
+        bin mul                                             0          1          -    ZERO                 
+        bin sb                                              0          1          -    ZERO                 
+        bin sh                                              0          1          -    ZERO                 
+    Coverpoint I_TYPE                                  57.69%        100          -    Uncovered            
+        covered/total bins:                                15         26          -                      
+        missing/total bins:                                11         26          -                      
+        % Hit:                                         57.69%        100          -                      
+        option.weight=1
+        option.goal=100
+        option.comment=
+        option.at_least=1
+        option.auto_bin_max=64
+        option.detect_overlap=0
+        bin mfhi                                            0          1          -    ZERO                 
+        bin mthi                                            0          1          -    ZERO                 
+        bin mflo                                            0          1          -    ZERO                 
+        bin mtlo                                            0          1          -    ZERO                 
+        bin mult                                            0          1          -    ZERO                 
+        bin multu                                           0          1          -    ZERO                 
+        bin div                                             0          1          -    ZERO                 
+        bin divu                                            0          1          -    ZERO                 
+        bin sub                                             0          1          -    ZERO                 
+        bin xor_                                            0          1          -    ZERO                 
+        bin nor_                                            0          1          -    ZERO                 
+
+TOTAL COVERGROUP COVERAGE: 70.74%  COVERGROUP TYPES: 1
+
+Total Coverage By Instance (filtered view): 70.74%
+

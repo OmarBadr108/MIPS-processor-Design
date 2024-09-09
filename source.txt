@@ -1,0 +1,16 @@
+ALU.v
+alu_control.v
+branch_control_AND.v
+Control_Unit.v
+gen_mux.v
+Instruction_Data_memory.v
+pc_branch.v
+pc_plus_4.v
+pc_reg.v
+Register_file.v
+shifter.v
+sign_extend.v
+zero_extend.v
+Byte_control.v
+MIPS_TOP.v
+MIPS_TB.sv
