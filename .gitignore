@@ -4,3 +4,11 @@
 /project_4
 /project_2
 /project_1
+/after branch before exceptions/project_1
+/after branch before exceptions/work
+/after exceptions/project_1
+*.xml
+/after exceptions/project_2
+/after exceptions/work
+/Before_Branch_prediction/work
+/MIPS_AHB/work
