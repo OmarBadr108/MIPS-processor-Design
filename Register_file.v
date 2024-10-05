@@ -21,7 +21,7 @@ module register_file (
 	assign rd_data1 = (rd_addr1 != 0) ? regfile [rd_addr1] : 0 ;
 	assign rd_data2 = (rd_addr2 != 0) ? regfile [rd_addr2] : 0 ; 
 
-	always @(posedge clk or negedge rst_n) begin
+	always @(negedge clk or negedge rst_n) begin
 		if (!rst_n) begin
 			// assign all the default values for all registers .. to be continued
 			for ( i = 0 ; i < 32 ; i = i +1)
@@ -32,6 +32,9 @@ module register_file (
 				regfile[wr_addr3] <= wr_data3 ;
 			end 
 			regfile [0] <= 'd0 ; // register zero
+
+			//rd_data1 = (rd_addr1 != 0) ? regfile [rd_addr1] : 0 ;
+			//rd_data2 = (rd_addr2 != 0) ? regfile [rd_addr2] : 0 ;
 		end
 	end
 endmodule 

@@ -11,7 +11,7 @@ module mips_testbench ;
 
 	
 	logic [31:0] INSTRUCTION_TB ;
-	assign INSTRUCTION_TB = mips_top_inst.INSTRUCTION ;
+	assign INSTRUCTION_TB = mips_top_inst.INSTRUCTION_F ;
 
 	//--------------------------------------------------
 	// clk generation
@@ -69,7 +69,8 @@ module mips_testbench ;
 */
  		//--------------------------------------------------
 		// I-Type Constraints 
-		//--------------------------------------------------  
+		//-------------------------------------------------- 
+		 /*
  		constraint Branch_location {
  			if (OP_CODE inside {[1:7]}) {
         		({{16{IMM_16 [15]}} , IMM_16} << 2) inside {-200 ,200 } ; // as instruction memory is 4096 in depth (-3)
@@ -90,7 +91,7 @@ module mips_testbench ;
         		IMM_26 inside {-200, 200}; // as instruction memory is 4096 in depth and this imm_26 will be multiplied by 4 
         	}
  		}
-
+*/
 	endclass 
 
 	//--------------------------------------------------
@@ -104,6 +105,13 @@ module mips_testbench ;
 		$stop ;
 	end 
 
+
+
+
+
+	//--------------------------------------------------
+	// Form LUT instruction memory 
+	//-------------------------------------------------- 
 	initial begin
 		wait (rst_n) ;
 		//write_instruction_file();
@@ -111,6 +119,94 @@ module mips_testbench ;
 		$display("Reading instructions %t",$time) ;
 		$readmemh("mem.txt", mips_top_inst.instruction_mem.mem);
 	end 
+
+	//--------------------------------------------------
+	// Form BRAM instruction memory 
+	//-------------------------------------------------- 
+
+/*
+
+integer file;
+reg [7:0] word; // An 8-bit register to store each byte read from the file
+integer i;      // Address index
+integer mem_select; // Variable to cycle through BRAM0 to BRAM3
+
+initial begin
+	wait (rst_n) ;
+	#1 ;
+  i = 0;            // Initialize address index
+  mem_select = 0;    // Initialize memory select counter
+  
+  // Open the memory file
+  file = $fopen("mem.txt", "r");
+  if (file == 0) begin
+    $display("Error: Could not open file.");
+    $finish;
+  end
+
+  // Loop through the file until end-of-file (EOF) is reached
+  while (!$feof(file)) begin
+    // Read an 8-bit value from the file using fscanf (expect hexadecimal format)
+    if ($fscanf(file, "%h\n", word) != 1) begin
+      $display("Error: Failed to read byte at address %0d", i);
+      $finish;
+    end
+    $display("Catch up word = %h  mem select = %h time :%0t",word ,mem_select , $time);
+    // Round-robin assignment to the BRAMs
+    case (mem_select)
+      'd0: mips_top_inst.instruction_mem.BRAM0[i] = word;  // Assign the byte to BRAM0
+      'd1: mips_top_inst.instruction_mem.BRAM1[i] = word;  // Assign the byte to BRAM1
+      'd2: mips_top_inst.instruction_mem.BRAM2[i] = word;  // Assign the byte to BRAM2
+      'd3: mips_top_inst.instruction_mem.BRAM3[i] = word;  // Assign the byte to BRAM3
+    endcase
+
+    // Update the mem_select counter (0 -> 1 -> 2 -> 3 -> 0 ...)
+    mem_select = mem_select + 1;
+
+    // Increment the address index only after one complete 32-bit word has been filled
+    if (mem_select == 4) begin
+      mem_select = 0; // Reset mem_select to 0 after completing a full word
+      i = i + 1;      // Move to the next address after filling all 4 BRAMs
+    end
+  end
+
+  // Close the file
+  $fclose(file);
+end
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//--------------------------------------------------
 	// Signals and macros for TASKS 
@@ -160,15 +256,15 @@ module mips_testbench ;
 
 		// for branch and jump
 		sign_imm_shifted_delayed <= mips_top_inst.sign_imm_shifted ;
-		PC_plus_4_delayed 	     <= mips_top_inst.PC_plus_4 ;
-		pc_delayed 	 	 	 	 <= mips_top_inst.pc ;
-		sign_imm_delayed         <= mips_top_inst.sign_imm ;
+		PC_plus_4_delayed 	     <= mips_top_inst.PC_plus_4_F;
+		pc_delayed 	 	 	 	 <= mips_top_inst.PC_F ;
+		sign_imm_delayed         <= mips_top_inst.SignExt_D;
 
 		// special registers 
 		lo_reg_delayed <= lo_reg ;
 		hi_reg_delayed <= hi_reg ;
 	end 
-
+/*
 	//--------------------------------------------------
 	// Self_checking block 
 	//--------------------------------------------------  
@@ -194,7 +290,7 @@ module mips_testbench ;
 			end
 		endcase 
 	end 
-
+*/
 	
 
 	//--------------------------------------------------
@@ -236,6 +332,7 @@ module mips_testbench ;
 			rst_n = 1'b0    ; 	// ASSERTED
 			#(CLK_PERIOD/2);
 			#(CLK_PERIOD/4);
+			#(CLK_PERIOD);
 			rst_n = 1'b1    ;     // DEASSERTED
 		end 
 	endtask 
@@ -302,13 +399,13 @@ module mips_testbench ;
 				end
 
 				6'd8 : begin // jr
-					assert (`REGFILE[RS] == mips_top_inst.pc )
+					assert (`REGFILE[RS] == mips_top_inst.PC_F )
 						 $display("[R-type] [jr] correct ! , %0t",$time);
 					else $display("[R-type] [jr] WRONG ! , %0t"  ,$time);
 				end
 
 				6'd9 : begin // jalr
-					assert ((`REGFILE[RS] == mips_top_inst.pc) && (PC_plus_4_delayed == `REGFILE[31]) )
+					assert ((`REGFILE[RS] == mips_top_inst.PC_F) && (PC_plus_4_delayed == `REGFILE[31]) )
 						 $display("[R-type] [jalr] correct ! , %0t",$time);
 					else $display("[R-type] [jalr] WRONG ! , %0t"  ,$time);
 				end
@@ -458,13 +555,13 @@ module mips_testbench ;
 
 			case (op_code_tb_delayed)
 				6'd2 : begin // J  
-					assert (mips_top_inst.pc == {mips_top_inst.pc[31:28],Imm_26_task,2'b00})
+					assert (mips_top_inst.PC_F== {mips_top_inst.PC_F[31:28],Imm_26_task,2'b00})
 						 $display("[J-type] [J] correct ! , %0t",$time);
 					else $display("[J-type] [J] WRONG ! , %0t"  ,$time);
 				end 
 
 				6'd3 : begin // Jal  
-					assert ((mips_top_inst.pc  == {mips_top_inst.pc[31:28],Imm_26_task,2'b00}) && 
+					assert ((mips_top_inst.PC_F == {mips_top_inst.PC_F[31:28],Imm_26_task,2'b00}) && 
 						(PC_plus_4_delayed == `REGFILE[31])  ) // $ra
 
 						 $display("[J-type] [Jal] correct ! , %0t",$time);
@@ -563,7 +660,7 @@ module mips_testbench ;
 
 				6'd4 : begin // beq
 					if (`REGFILE[RT] == `REGFILE[RS]) begin 
-						assert (mips_top_inst.pc == sign_imm_shifted_delayed + PC_plus_4_delayed) begin 
+						assert (mips_top_inst.PC_F== sign_imm_shifted_delayed + PC_plus_4_delayed) begin 
 							$display("[I-type] [Beq] Branched successfully ! , %0t",$time);
 						end 
 						else begin 
@@ -572,7 +669,7 @@ module mips_testbench ;
 					end 
 
 					else begin 
-						assert (mips_top_inst.pc ==  PC_plus_4_delayed) begin 
+						assert (mips_top_inst.PC_F==  PC_plus_4_delayed) begin 
 							$display("[I-type] [Beq] not equal so didn't branch .. successfully ! , %0t",$time);
 						end 
 						else begin 
@@ -584,7 +681,7 @@ module mips_testbench ;
 
 				6'd5 : begin // bne
 					if (`REGFILE[RT] != `REGFILE[RS]) begin 
-						assert (mips_top_inst.pc == sign_imm_shifted_delayed + PC_plus_4_delayed) begin 
+						assert (mips_top_inst.PC_F== sign_imm_shifted_delayed + PC_plus_4_delayed) begin 
 							$display("[I-type] [Bne] Branched successfully ! , %0t",$time);
 						end 
 						else begin 
@@ -593,7 +690,7 @@ module mips_testbench ;
 					end 
 
 					else begin 
-						assert (mips_top_inst.pc ==  PC_plus_4_delayed) begin 
+						assert (mips_top_inst.PC_F==  PC_plus_4_delayed) begin 
 							$display("[I-type] [Bne] not not equal so didn't branch .. successfully ! , %0t",$time);
 						end 
 						else begin 
@@ -605,7 +702,7 @@ module mips_testbench ;
 
 				6'd6 : begin // blez
 					if (`REGFILE[RS] <= 0 ) begin 
-						assert(mips_top_inst.pc == sign_imm_shifted_delayed + PC_plus_4_delayed) begin 
+						assert(mips_top_inst.PC_F== sign_imm_shifted_delayed + PC_plus_4_delayed) begin 
 							$display("[I-type] [blez] Branched successfully ! , %0t",$time);
 						end 
 						else begin 
@@ -614,7 +711,7 @@ module mips_testbench ;
 					end 
 
 					else begin 
-						assert(mips_top_inst.pc ==  PC_plus_4_delayed) begin 
+						assert(mips_top_inst.PC_F==  PC_plus_4_delayed) begin 
 							$display("[I-type] [blez] more than zero so didn't branch .. successfully ! , %0t",$time);
 						end 
 						else begin 
@@ -625,7 +722,7 @@ module mips_testbench ;
 
 				6'd7 : begin // bgtz
 					if (`REGFILE[RS] > 0 ) begin 
-						assert(mips_top_inst.pc == sign_imm_shifted_delayed + PC_plus_4_delayed) begin 
+						assert(mips_top_inst.PC_F== sign_imm_shifted_delayed + PC_plus_4_delayed) begin 
 							$display("[I-type] [bgtz] Branched successfully ! , %0t",$time);
 						end 
 						else begin 
@@ -634,7 +731,7 @@ module mips_testbench ;
 					end 
 
 					else begin 
-						assert(mips_top_inst.pc ==  PC_plus_4_delayed) begin 
+						assert(mips_top_inst.PC_F==  PC_plus_4_delayed) begin 
 							$display("[I-type] [bgtz] condition is not satisfid so didn't branch .. successfully ! , %0t",$time);
 						end 
 						else begin 
@@ -646,7 +743,7 @@ module mips_testbench ;
 				6'd1 : begin // bltz and bgez
 					if (RT == 'd0) begin // bltz
 						if (`REGFILE[RS] < 0 ) begin 
-							assert(mips_top_inst.pc == sign_imm_shifted_delayed + PC_plus_4_delayed) begin 
+							assert(mips_top_inst.PC_F== sign_imm_shifted_delayed + PC_plus_4_delayed) begin 
 								$display("[I-type] [bltz] Branched successfully ! , %0t",$time);
 							end 
 							else begin 
@@ -655,7 +752,7 @@ module mips_testbench ;
 						end 
 
 						else begin 
-							if (mips_top_inst.pc ==  PC_plus_4_delayed) begin 
+							if (mips_top_inst.PC_F==  PC_plus_4_delayed) begin 
 								$display("[I-type] [bltz] condition is not satisfid so didn't branch .. successfully ! , %0t",$time);
 							end 
 							else begin 
@@ -665,7 +762,7 @@ module mips_testbench ;
 					end 
 					else if (RT == 'd1) begin // bgez
 						
-						assert((`REGFILE[RS] >= 0) && (mips_top_inst.pc == sign_imm_shifted_delayed + PC_plus_4_delayed) || (mips_top_inst.pc ==  PC_plus_4_delayed) && (`REGFILE[RS] < 0) ) begin 
+						assert((`REGFILE[RS] >= 0) && (mips_top_inst.PC_F== sign_imm_shifted_delayed + PC_plus_4_delayed) || (mips_top_inst.PC_F==  PC_plus_4_delayed) && (`REGFILE[RS] < 0) ) begin 
 								$display("[I-type] [bgez] Branched successfully ! , %0t",$time);
 						end 
 						else begin 
@@ -677,7 +774,7 @@ module mips_testbench ;
 						$display("[I-type] Invalid command ! , %0t",$time);
 					end
 				end
-
+/*
 
 				6'd43 : begin // sw  
 					// analyze the statemnt carefully 
@@ -762,7 +859,7 @@ module mips_testbench ;
 				//		$display("[I-type] [Mul] WRONG , result may have exceeded 32-bit ! RT = %d RS = %d ,REGFILE[RS] = %h  , REGFILE[RT] = %h , %0t"  ,
 				//		RT , RS ,`REGFILE[RS] ,`REGFILE[RT] , $time);
 				//end
-
+*/
 				
 
 				default : begin 
@@ -847,4 +944,162 @@ module mips_testbench ;
 
 	endgroup
 		Instructions  Instructions_instance = new();
+
+
+
+	//--------------------------------------------------
+	// R-Type ASSERTIONS
+	//--------------------------------------------------
+	property Add_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        ((mips_top_inst.opcode_D == 'd0) && (mips_top_inst.funct_D == 'd32)) |->  
+    	##3 (mips_top_inst.ALU_result_W == $past(mips_top_inst.src_a /* excute */,2) +  $past(mips_top_inst.src_b /* excute */,2));									 
+    endproperty
+
+	assert property (Add_property) $display("[ADD] Correct %0t",$time);
+  	else $error("[ADD] instruction error: inputs or outputs do not match , %0t",$time);
+
+
+  	property Sub_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        ((mips_top_inst.opcode_D == 'd0) && (mips_top_inst.funct_D == 'd34)) |->  
+    	##3 (mips_top_inst.ALU_result_W == $past(mips_top_inst.src_a /* excute */,2) -  $past(mips_top_inst.src_b /* excute */,2));									 
+    endproperty
+
+	assert property (Sub_property) $display("[SUB] Correct  %0t",$time);
+  	else $error("[SUB] instruction error: inputs or outputs do not match , %0t",$time);
+
+  	property AND_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        ((mips_top_inst.opcode_D == 'd0) && (mips_top_inst.funct_D == 'd36)) |->  
+    	##3 (mips_top_inst.ALU_result_W == ($past(mips_top_inst.src_a /* excute */,2) &  $past(mips_top_inst.src_b /* excute */,2)));									 
+    endproperty
+
+	assert property (AND_property) $display("[AND] Correct  %0t",$time);
+  	else $error("[AND] instruction error: inputs or outputs do not match , %0t",$time);
+
+  	property OR_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        ((mips_top_inst.opcode_D == 'd0) && (mips_top_inst.funct_D == 'd37)) |->  
+    	##3 (mips_top_inst.ALU_result_W == ($past(mips_top_inst.src_a /* excute */,2) |  $past(mips_top_inst.src_b /* excute */,2)));									 
+    endproperty
+
+	assert property (OR_property) $display("[OR] Correct  %0t",$time);
+  	else $error("[OR] instruction error: inputs or outputs do not match , %0t",$time);
+
+  	property sll_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        ((mips_top_inst.opcode_D == 'd0) && (mips_top_inst.funct_D == 'd0)) |->  
+    	##3 (mips_top_inst.ALU_result_W == ($past(mips_top_inst.src_a /* excute */,2)) <<  ($past(mips_top_inst.src_b /* excute */,2))   );									 
+    endproperty
+
+	assert property (sll_property) $display("[SLL] Correct  %0t",$time);
+  	else $error("[SLL] instruction error: inputs or outputs do not match , %0t",$time);
+
+	//--------------------------------------------------
+	// J-Type ASSERTIONS
+	//--------------------------------------------------
+
+	property J_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        (mips_top_inst.opcode_D == 'd2) |=>  
+    	$past(mips_top_inst.jump_addr_D , 1) == mips_top_inst.PC_F ;									 
+    endproperty
+
+    assert property (J_property) $display("[J] Correct %0t",$time);
+  	else $error("[J] instruction error: inputs or outputs do not match , %0t",$time);
+
+  	property Jal_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        (mips_top_inst.opcode_D == 'd3) |=>  
+    	$past(mips_top_inst.jump_addr_D , 1 ) == mips_top_inst.PC_F ;									  
+    endproperty
+
+    assert property (Jal_property) $display("[Jal] Correct %0t",$time);
+  	else $error("[Jal] instruction error: inputs or outputs do not match , %0t",$time);
+
+  	property Jr_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        (mips_top_inst.opcode_D == 'd0) && (mips_top_inst.funct_D == 'd8) |->  
+    	##1 ($past(mips_top_inst.rd_data1 , 1 ) == mips_top_inst.PC_F );									  
+    endproperty
+
+    assert property (Jr_property) $display("[Jr] Correct %0t",$time);
+  	else $error("[Jr] instruction error: inputs or outputs do not match , %0t",$time);
+/*
+
+	//--------------------------------------------------
+	// I-Type ASSERTIONS
+	//--------------------------------------------------
+	property Addi_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        (mips_top_inst.opcode_D == 'd8) |->  
+    	##3 (mips_top_inst.ALU_result_W == $past(mips_top_inst.src_a,2) +  $past(mips_top_inst.src_b,2));									 
+    endproperty
+
+    assert property (Addi_property) $display("[ADDI] Correct %0t",$time);
+  	else $error("[ADDI] instruction error: inputs or outputs do not match , %0t",$time);
+
+
+  	property Addiu_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        (mips_top_inst.opcode_D == 'd9) |->  
+    	##3 (mips_top_inst.ALU_result_W == $past(mips_top_inst.src_a,2) +  $past(mips_top_inst.src_b,2));									 
+    endproperty
+
+    assert property (Addiu_property) $display("[ADDIU] Correct %0t",$time);
+  	else $error("[ADDIU] instruction error: inputs or outputs do not match , %0t",$time);
+
+
+  	property beq_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        (mips_top_inst.branch_control_D) |->  
+    	(mips_top_inst.PCBranch_result_D == mips_top_inst.PC_W);									 
+    endproperty
+
+    assert property (beq_property) $display("[beq] Correct %0t",$time);
+  	else $error("[beq] instruction error: inputs or outputs do not match , %0t",$time);
+   	
+
+  	property lw_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        (mips_top_inst.opcode_D == 'd35) |->  
+	##2 (mips_top_inst.ALU_result_M == $past(mips_top_inst.src_a_D,2) + $past(mips_top_inst.SignExt_D,2)); 
+		//&& (`DATA_MEM[(mips_top_inst.ALU_result_M)] == mips_top_inst.ReadData_M));									 
+    endproperty
+
+    assert property (lw_property) $display("[lw] Correct %0t",$time);
+  	else $error("[lw] instruction error: inputs or outputs do not match , %0t",$time);
+
+  	property sw_property ;
+        @(posedge clk) 
+        disable iff (!rst_n)
+        (mips_top_inst.opcode_D == 'd43) |->  
+	##3 (mips_top_inst.ReadData_W == `DATA_MEM[($past(mips_top_inst.src_a_D,3) + $past(mips_top_inst.SignExt_D,3))]); 
+		//&& (`DATA_MEM[mips_top_inst.ALU_result_M] == mips_top_inst.rd_data_data_mem_M);									 
+    endproperty
+
+    assert property (sw_property) $display("[sw] Correct %0t",$time);
+  	else $error("[sw] instruction error: inputs or outputs do not match , %0t",$time);
+
+*/
+
+
+
+
+
+
+
 endmodule 

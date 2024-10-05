@@ -64,9 +64,6 @@ module alu_control (
 			{5'b00010,6'd42} : AluControl = 6'd42 ; // slt
 			{5'b00010,6'd43} : AluControl = 6'd43 ; // sltu
 			
-
-
-			{5'b00011,6'bxxx_xxx} : AluControl = 6'd44 ; // Branch family
 			
 			{5'b00100,6'bxxx_xxx} : AluControl = 6'd45 ; // andi
 			{5'b00101,6'bxxx_xxx} : AluControl = 6'd46 ; // ori

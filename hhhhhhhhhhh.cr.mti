@@ -1,0 +1,183 @@
+{C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Byte_control.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Byte_control.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module Byte_Control
+
+Top level modules:
+	Byte_Control
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/shifter.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/shifter.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module shift_left_2
+
+Top level modules:
+	shift_left_2
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/CLR_reg.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/CLR_reg.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module d_flipflop
+
+Top level modules:
+	d_flipflop
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/zero_extend.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/zero_extend.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module zero_extend
+
+Top level modules:
+	zero_extend
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/pc_plus_4.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/pc_plus_4.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module PC_plus_4
+
+Top level modules:
+	PC_plus_4
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Branch_Predictor.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Branch_Predictor.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module Branch_Predictor
+
+Top level modules:
+	Branch_Predictor
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Data_memory.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Data_memory.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module Data_memory
+
+Top level modules:
+	Data_memory
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/WriteBack_Fetch_reg.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/WriteBack_Fetch_reg.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module WriteBack_Ftech_Register
+
+Top level modules:
+	WriteBack_Ftech_Register
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Ins_d_reg.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Ins_d_reg.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module INSTRUCTION_D_DELAYED
+
+Top level modules:
+	INSTRUCTION_D_DELAYED
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/ALU.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/ALU.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module alu
+
+Top level modules:
+	alu
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Fetch_Decode_reg.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Fetch_Decode_reg.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module Fetch_Decode_Register
+
+Top level modules:
+	Fetch_Decode_Register
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Excute_Memory_reg.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Excute_Memory_reg.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module Excute_Memory_Register
+
+Top level modules:
+	Excute_Memory_Register
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Register_file.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Register_file.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module register_file
+
+Top level modules:
+	register_file
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Branch_Control.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Branch_Control.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module Branch_Control
+
+Top level modules:
+	Branch_Control
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Decode_Excute_reg.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Decode_Excute_reg.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module Decode_Excute_Register
+
+Top level modules:
+	Decode_Excute_Register
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/d_latch.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/d_latch.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module d_latch
+
+Top level modules:
+	d_latch
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/equal_unit.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/equal_unit.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module equal_unit_D
+
+Top level modules:
+	equal_unit_D
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Control_Unit.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Control_Unit.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module control_unit
+
+Top level modules:
+	control_unit
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/sign_extend.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/sign_extend.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module sign_extend
+
+Top level modules:
+	sign_extend
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/pc_branch.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/pc_branch.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module PC_branch
+
+Top level modules:
+	PC_branch
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/MIPS_TB.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/MIPS_TB.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module mips_testbench
+
+Top level modules:
+	mips_testbench
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Hazard_Unit.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Hazard_Unit.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module Hazarad_Unit
+
+Top level modules:
+	Hazarad_Unit
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Instruction_memory.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Instruction_memory.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module ins_memory
+
+Top level modules:
+	ins_memory
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/alu_control.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/alu_control.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module alu_control
+
+Top level modules:
+	alu_control
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Memory_to_writeBack_reg.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/Memory_to_writeBack_reg.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module Memory_WriteBack_Register
+
+Top level modules:
+	Memory_WriteBack_Register
+
+} {} {}} {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/gen_mux.v} {1 {vlog -work work -vopt -stats=none {C:/Users/omerb/OneDrive/Desktop/MIPS COURSE/Final Progress/MIPS-processor-Design/gen_mux.v}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module gen_mux
+
+Top level modules:
+	gen_mux
+
+} {} {}}
